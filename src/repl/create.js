@@ -65,17 +65,17 @@
       const strAppend = appFile.slice(idx + len);
       // console.log(index.slice(idx, idx + len))
       await promisify(fs.writeFile)(path.join(__dirname, INDEX_PATH), `${strPrepend}\n${newRoute}${strAppend}`);
-    } else {
-      console.log("No route provided yet...");
-    }
-
-    console.log(`
+      
+      console.log(`
       ${filename.value}.jsonファイルを作成しました。\n
       index.jsに以下のルーティングを追加しました。\n
 
       // routers\n
       ${newRoute}\n
     `);
+    } else {
+      console.log("No route provided yet...");
+    }
   } else {
     console.log("--[END]--");
   }

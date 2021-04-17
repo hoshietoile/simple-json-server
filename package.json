@@ -6,7 +6,9 @@
   "scripts": {
     "serve": "./node_modules/.bin/nodemon src/index.js",
     "lint-init": "eslint --init",
-    "lint": "eslint --fix src"
+    "lint": "eslint --fix src",
+    "rsrc:create": "node src/repl/create.js",
+    "rsrc:import:bulk": "node src/repl/bulkImport.js"
   },
   "author": "",
   "license": "ISC",

@@ -10,7 +10,7 @@ const globalErrorController = require("./errorController");
 const AppError = require("./assets/modules/appError");
 
 // consts
-const baseUrl = process.env.BASE_URL;
+// const baseUrl = process.env.BASE_URL;
 const port = process.env.PORT;
 
 const app = express();
@@ -19,10 +19,7 @@ const router = require("./router");
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-app.use(cors({
-  origin: `http://${baseUrl}:${port}`,
-  credentials: true
-}));
+app.use(cors());
 
 // access logs
 app.use(accessLogger());

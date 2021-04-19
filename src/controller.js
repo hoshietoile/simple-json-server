@@ -11,20 +11,20 @@ const JSON_PATH = path.join(__dirname, process.env.JSON_PATH);
 
 exports.findAll = handleAsync(async (req, res, next) => {
   const rsrc = yieldResource(req, next);
-  const users = await _getResource(rsrc);
+  const resources = await _getResource(rsrc);
   res.status(200).json({
-    data: users
+    data: resources
   });
 });
 
 exports.storeOne = handleAsync(async (req, res, next) => {
   const rsrc = yieldResource(req, next);
   const reqData = req.body;
-  const users = await _getResource(rsrc);
-  const id = _idProvider(users);
+  const resources = await _getResource(rsrc);
+  const id = _idProvider(resources);
   const storeTarget = { ...reqData, id };
-  const newUsers = users.concat(storeTarget);
-  await _storeResource(rsrc, newUsers);
+  const newResources = resources.concat(storeTarget);
+  await _storeResource(rsrc, newResources);
   
   res.status(201).json();
 });
@@ -32,10 +32,10 @@ exports.storeOne = handleAsync(async (req, res, next) => {
 exports.findOne = handleAsync(async (req, res, next) => {
   const rsrc = yieldResource(req, next);
   const id = req.params.id;
-  const users = await _getResource(rsrc);
-  const user = users.find(user => user.id === parseInt(id));
+  const resources = await _getResource(rsrc);
+  const resource = resources.find(resource => resource.id === parseInt(id));
   res.status(200).json({
-    data: user
+    data: resource
   });
 });
 
@@ -43,23 +43,23 @@ exports.updateOne = handleAsync(async (req, res, next) => {
   const rsrc = yieldResource(req, next);
   const id = req.params.id;
   const reqData = req.body;
-  const users = await _getResource(rsrc);
-  const user = users.find(user => user.id === parseInt(id));
-  const newUser = { ...user, ...reqData };
-  const index = users.findIndex(user => user.id === parseInt(id));
-  users.splice(index, 1);
-  users.push(newUser);
-  await _storeResource(rsrc, users);
+  const resources = await _getResource(rsrc);
+  const resource = resources.find(resource => resource.id === parseInt(id));
+  const newResource = { ...resource, ...reqData };
+  const index = resources.findIndex(resource => resource.id === parseInt(id));
+  resources.splice(index, 1);
+  resources.push(newResource);
+  await _storeResource(rsrc, resources);
   res.status(204).json();
 });
 
 exports.deleteOne = handleAsync(async (req, res, next) => {
   const rsrc = yieldResource(req, next);
   const id = req.params.id;
-  const users = await _getResource(rsrc);
-  const index = users.findIndex(user => user.id === parseInt(id));
-  users.splice(index, 1);
-  await _storeResource(rsrc, users);
+  const resources = await _getResource(rsrc);
+  const index = resources.findIndex(resource => resource.id === parseInt(id));
+  resources.splice(index, 1);
+  await _storeResource(rsrc, resources);
   res.status(204).json();
 });
 

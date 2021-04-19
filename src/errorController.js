@@ -4,7 +4,7 @@ const sendError = (err, _, res) => {
   return res.status(err.statusCode).json({
     status: err.status,
     message: err.message,
-    isOperational: err?.isOperational
+    isOperational: err.isOperational ? err.isOperational : null
   });
 };
 

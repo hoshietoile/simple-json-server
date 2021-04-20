@@ -14,7 +14,7 @@
 
 - .env.exampleをコピーして.envファイルを作成する
 
-      cp .env.example .env
+      cp .env.sample .env
 
 - サーバーを起動する
 
